@@ -41,9 +41,31 @@ func (s *ResourceClientAdaptor) getSourceClient(url string) (ResourceClient, err
 	if err != nil {
 		return nil, err
 	}
+	s.RLock()
 	client, ok := s.clients[schema]
+	s.RUnlock()
 	if !ok || client == nil {
+		if client, err = s.loadSourcePlugin(schema); err == nil && client != nil {
+			return client, nil
+		}
 		return nil, fmt.Errorf("does not support schema(%s) client", schema)
 	}
+	return client, nil
+}
+
+func (s *ResourceClientAdaptor) loadSourcePlugin(schema string) (ResourceClient, error) {
+	s.Lock()
+	defer s.Unlock()
+	// double check
+	client, ok := s.clients[schema]
+	if ok {
+		return client, nil
+	}
+
+	client, err := loadPlugin(schema)
+	if err != nil {
+		return nil, err
+	}
+	s.clients[schema] = client
 	return client, nil
 }

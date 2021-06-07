@@ -123,10 +123,12 @@ build-deb-dfget:
 .PHONY: build-deb-dfget
 
 test: ## Run unittests
+	@go generate ${PKG_LIST}
 	@go test -race -short ${PKG_LIST}
 .PHONY: test
 
 test-coverage: ## Run tests with coverage
+	@go generate ${PKG_LIST}
 	@go test -race -short ${PKG_LIST} -coverprofile cover.out -covermode=atomic
 	@cat cover.out >> coverage.txt
 .PHONY: test-coverage

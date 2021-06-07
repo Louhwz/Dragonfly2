@@ -18,6 +18,7 @@ package source
 
 import (
 	"io"
+	"sync"
 )
 
 var clients = make(map[string]ResourceClient)
@@ -28,13 +29,13 @@ func Register(schema string, resourceClient ResourceClient) {
 
 func NewSourceClient() (ResourceClient, error) {
 	return &ResourceClientAdaptor{
+		RWMutex: sync.RWMutex{},
 		clients: clients,
 	}, nil
 }
 
-// SourceClient supply apis that interact with the source.
+// ResourceClient supply apis that interact with the source.
 type ResourceClient interface {
-
 	// GetContentLength get content length from source
 	GetContentLength(url string, headers map[string]string) (int64, error)
 
@@ -49,6 +50,7 @@ type ResourceClient interface {
 }
 
 type ResourceClientAdaptor struct {
+	sync.RWMutex
 	clients map[string]ResourceClient
 }
 
