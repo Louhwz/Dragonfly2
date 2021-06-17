@@ -8,7 +8,7 @@ installation:
 scheduler:
   name: scheduler
   replicas: 1
-  image: dragonflyoss/scheduler
+  image: louhwz/scheduler
   tag: 0.1.0
   pullPolicy: IfNotPresent
   resources:
@@ -43,7 +43,7 @@ cdn:
   nameOverride: ""
   fullnameOverride: ""
   replicas: 1
-  image: dragonflyoss/cdn
+  image: louhwz/cdn
   tag: 0.1.0
   pullPolicy: IfNotPresent
   resources:
@@ -96,7 +96,7 @@ dfdaemon:
   name: dfdaemon
   nameOverride: ""
   fullnameOverride: ""
-  image: dragonflyoss/dfdaemon
+  image: louhwz/dfdaemon
   tag: 0.1.0
   pullPolicy: IfNotPresent
   resources:
