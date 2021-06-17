@@ -4,7 +4,7 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-D7Y_VERSION="0.1.0"
+D7Y_VERSION="0.1.1"
 D7Y_REGISTRY="louhwz"
 curDir=$(cd "$(dirname "$0")" && pwd)
 cd "${curDir}/../" || return

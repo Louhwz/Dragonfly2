@@ -9,7 +9,7 @@ scheduler:
   name: scheduler
   replicas: 1
   image: louhwz/scheduler
-  tag: 0.1.0
+  tag: 0.1.1
   pullPolicy: IfNotPresent
   resources:
     requests:
@@ -44,7 +44,7 @@ cdn:
   fullnameOverride: ""
   replicas: 1
   image: louhwz/cdn
-  tag: 0.1.0
+  tag: 0.1.1
   pullPolicy: IfNotPresent
   resources:
     requests:
@@ -97,7 +97,7 @@ dfdaemon:
   nameOverride: ""
   fullnameOverride: ""
   image: louhwz/dfdaemon
-  tag: 0.1.0
+  tag: 0.1.1
   pullPolicy: IfNotPresent
   resources:
     requests:
